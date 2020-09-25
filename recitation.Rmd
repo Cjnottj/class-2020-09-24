@@ -1,0 +1,58 @@
+---
+title: "Recitation 9/23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reprex)
+library(tidyverse)
+library(dslabs)
+```
+
+```{r}
+library(reprex)
+library(tidyverse)
+library(dslabs)
+
+data("murders")
+
+murder %>% mutate(rate = total/population * 100000)
+
+
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+library(gganimate)
+theme_set(theme_bw())
+head(gapminder)
+```
+```{r}
+p <- ggplot(gapminder,
+            aes(x = gdpPercap, y=lifeExp, size = pop, colour = continent)) +
+      geom_point(show.legend = TRUE, alpha = 0.7) +
+      scale_color_viridis_d() +
+      scale_size(range = c(2, 12)) +
+      scale_x_log10() +
+      labs(x = "GDP per capita", y = "Life expectancy")
+p
+```
+```{r}
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}")
+```
+
+```{r}
+p + facet_wrap(~continent) +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}")
+```
+
+```{r}
+p + transition_time(year) +
+  labs(title = "Year: {frame_time}") +
+  view_follow(fixed_y = TRUE)
+```
+
